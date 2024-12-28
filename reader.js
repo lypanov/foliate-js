@@ -194,6 +194,12 @@ class Reader {
         menu.groups.layout.select('paginated')
     }
     async open(file) {
+        console.log("OPEN CALLED, SETTING WINDOW LISTENER");
+        window.addEventListener("message", (e) => {
+          console.log("OMG MESSAGE", e);
+          window.ReactNativeWebView.postMessage("HOLY SHIT WE GOT OUT! FREEEDOM!");
+        });
+
         this.view = await getView(file)
         this.view.addEventListener('load', this.#onLoad.bind(this))
         this.view.addEventListener('relocate', this.#onRelocate.bind(this))
