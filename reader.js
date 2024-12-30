@@ -152,7 +152,8 @@ const $ = document.querySelector.bind(document)
 const locales = 'en'
 const percentFormat = new Intl.NumberFormat(locales, { style: 'percent' })
 
-class Reader {
+// AK exported
+export class Reader {
     #tocView
     style = {
         spacing: 1.4,

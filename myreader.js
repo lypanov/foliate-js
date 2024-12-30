@@ -1,4 +1,4 @@
-import './reader.js'
+import { Reader } from './reader.js'
 
 const $ = document.querySelector.bind(document)
 
