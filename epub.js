@@ -550,7 +550,7 @@ class Resources {
             ?? this.getItemByHref(this.guide
                 ?.find(ref => ref.type.includes('cover'))?.href)
 
-        this.cfis = CFI.fromElements($$itemref)
+        this.cfis = []; // CFI.fromElements($$itemref)
     }
     getItemByID(id) {
         return this.manifest.find(item => item.id === id)
@@ -856,7 +856,7 @@ ${doc.querySelector('parsererror').innerText}`)
                 unload: () => this.#loader.unloadItem(item),
                 createDocument: () => this.loadDocument(item),
                 size: this.getSize(item.href),
-                cfi: this.resources.cfis[index],
+                cfi: [], // this.resources.cfis[index],
                 linear,
                 pageSpread: getPageSpread(properties),
                 resolveHref: href => resolveURL(href, item.href),
