@@ -104,6 +104,12 @@ class Reader {
         menu.groups.layout.select('paginated')
     }
     async open(file) {
+        console.log("OPEN CALLED, SETTING WINDOW LISTENER");
+        window.addEventListener("message", (e) => {
+          console.log("OMG MESSAGE", e);
+          window.ReactNativeWebView.postMessage("HOLY SHIT WE GOT OUT! FREEEDOM!");
+        });
+
         this.view = document.createElement('foliate-view')
         document.body.append(this.view)
         await this.view.open(file)
@@ -228,6 +234,12 @@ $('#file-input').addEventListener('change', e =>
 $('#file-button').addEventListener('click', () => $('#file-input').click())
 
 const params = new URLSearchParams(location.search)
-const url = params.get('url')
-if (url) open(url).catch(e => console.error(e))
+const url = params.get('url2')
+if (url) fetch(url)
+    .then(res => res.blob())
+    .then(blob => open(new File([blob], new URL(url, window.location.origin).pathname)))
+    .catch(e => {
+        console.error(e);
+        console.error('Stack trace:', e.stack);
+    })
 else dropTarget.style.visibility = 'visible'

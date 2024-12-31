@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="light dark">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' blob:; script-src 'self'; style-src 'self' blob: 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: data: *; frame-src blob: data:; object-src blob: data:; form-action 'none';">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' blob: http://localhost:3001 http://localhost:3002; script-src 'self' 'sha256-mCJO3Ll2ycpTkIszVFyH4/g4fTLdMbe4zgJ4OaiDrl0='; style-src 'self' blob: 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' blob: data: *; frame-src blob: data:; object-src blob: data:; font-src 'self' http://localhost:3001 http://localhost:3002; form-action 'none';">
 <title>E-Book Reader</title>
 <style>
 :root {
@@ -301,4 +301,4 @@ body {
         </svg>
     </button>
 </div>
-<script src="reader.js" type="module"></script>
+<script src="myreader.js" type="module"></script>
