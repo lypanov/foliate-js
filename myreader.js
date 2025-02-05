@@ -193,6 +193,47 @@ class Reader {
     }
     #onLoad({ detail: { doc } }) {
         doc.addEventListener('keydown', this.#handleKeydown.bind(this))
+
+        // Inject static text 'WebviewInspectable' into every paragraph in the
+        //   rendered EPUB document. Make it entirely invisible to the user,
+        //   but very much visible to Maestro. We can use this to ensure that
+        //   Maestro is actually digging into the iframe as it randomly refuses
+        //   to do so. See maestrowrap.sh in the rssificator repository for
+        //   logic which skips such failures.
+
+        const style = doc.createElement('style');
+        style.textContent = `
+            .accessible-hidden {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                white-space: nowrap;
+                border: 0;
+            }
+            .debug-visible {
+                display: block;
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: #ff0000;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+            }
+        `;
+        doc.head.appendChild(style);
+
+        const paragraphs = doc.querySelectorAll('p, div');
+        paragraphs.forEach(p => {
+            const hiddenSpan = doc.createElement('span');
+            hiddenSpan.className = 'accessible-hidden';
+            // hiddenSpan.className = 'accessible-hidden debug-visible';
+            hiddenSpan.textContent = 'WebviewInspectable';
+            p.appendChild(hiddenSpan);
+        });
     }
     #onRelocate({ detail }) {
         const { fraction, location, tocItem, pageItem } = detail
