@@ -246,6 +246,17 @@ class Reader {
         slider.value = fraction
         slider.title = `${percent} · ${loc}`
         if (tocItem?.href) this.#tocView?.setCurrentHref?.(tocItem.href)
+
+        const totalPages = this.view.renderer.pages;
+        const currentPage = this.view.renderer.page;
+        const isOnLastPage = currentPage + 1 === totalPages - 1; // unsure why we have to do the weird - 1's and the + 1's here...
+        const strct = {
+            onLastPage: isOnLastPage,
+            lastPageIdx: totalPages - 1,
+            currentPageIdx: currentPage,
+            currentPageNum: currentPage + 1
+        }
+        console.log("PAGE^", JSON.stringify(strct));
     }
 }
 
