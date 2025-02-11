@@ -204,6 +204,7 @@ class Reader {
         const style = doc.createElement('style');
         style.textContent = `
             .accessible-hidden {
+                display: block;
                 position: absolute;
                 width: 1px;
                 height: 1px;
@@ -211,6 +212,8 @@ class Reader {
                 margin: -1px;
                 overflow: hidden;
                 white-space: nowrap;
+                clip: rect(0 0 0 0);
+                clip-path: inset(50%);
                 border: 0;
             }
             .debug-visible {
