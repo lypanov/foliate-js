@@ -237,6 +237,7 @@ class Reader {
             hiddenSpan.textContent = 'WebviewInspectable';
             p.appendChild(hiddenSpan);
         });
+        this.view.dispatchEvent(new CustomEvent('ready', { like_totally: true }))
     }
     #onRelocate({ detail }) {
         const { fraction, location, tocItem, pageItem } = detail
